@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Run FPS Game",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/game",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "lldb",
+        "preLaunchTask": "build game"
+      }
+    ]
+  }
+  
