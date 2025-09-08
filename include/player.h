@@ -10,6 +10,8 @@ struct Player {
 
     void moveForward(float speed, const char* map, int mapWidth, int mapHeight);
     void moveBackward(float speed, const char* map, int mapWidth, int mapHeight);
+    void moveLeft(float speed, const char* map, int mapWidth, int mapHeight);
+    void moveRight(float speed, const char* map, int mapWidth, int mapHeight);
     void rotateLeft(float angle);
     void rotateRight(float angle);
 };

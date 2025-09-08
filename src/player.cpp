@@ -7,7 +7,7 @@ static bool isWalkable(int x, int y, const char* map, int mapWidth, int mapHeigh
 }
 
 Player::Player(float startX, float startY) 
-    : x(startX), y(startY), dirX(1.0f), dirY(0.0f) {}
+    : x(startX), y(startY), dirX(0.0f), dirY(1.0f) {}
 
 void Player::moveForward(float speed, const char* map, int mapWidth, int mapHeight) {
     float newX = x + dirX * speed;
@@ -20,6 +20,22 @@ void Player::moveForward(float speed, const char* map, int mapWidth, int mapHeig
 void Player::moveBackward(float speed, const char* map, int mapWidth, int mapHeight) {
     float newX = x - dirX * speed;
     float newY = y - dirY * speed;
+    if (isWalkable((int)newX, (int)newY, map, mapWidth, mapHeight)) {
+        x = newX; y = newY;
+    }
+}
+
+void Player::moveLeft(float speed, const char* map, int mapWidth, int mapHeight) {
+    //moving right should be in perp to dir vector
+    float newX = x + dirY * speed;
+    float newY = y - dirX * speed;
+    if (isWalkable((int)newX, (int)newY, map, mapWidth, mapHeight)) {
+        x = newX; y = newY;
+    }
+}
+void Player::moveRight(float speed, const char* map, int mapWidth, int mapHeight) {
+    float newX = x - dirY * speed;
+    float newY = y + dirX * speed;
     if (isWalkable((int)newX, (int)newY, map, mapWidth, mapHeight)) {
         x = newX; y = newY;
     }

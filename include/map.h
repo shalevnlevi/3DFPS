@@ -5,6 +5,6 @@ extern const int mapWidth;
 extern const int mapHeight;
 extern const char map[];
 
-void printMapWithPlayer(int playerX, int playerY);
+void printMapWithPlayer(int playerX, int playerY, float dirX, float dirY);
 
 #endif
