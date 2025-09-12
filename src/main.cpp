@@ -83,7 +83,7 @@ void render3DView(const Player& player, const char* map, int mapWidth, int mapHe
                 int shade = 232 + std::min(23, int(perpWallDist * 3));
                 if (shade < 232) shade = 255;
                 if (shade > 255) shade = 232;
-                std::cout << "\033[38;5;" << shade << "m#\033[0m";
+                std::cout << "\033[38;5;" << shade << "m▓\033[0m";
             }
         }
         std::cout << "\n";
