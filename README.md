@@ -32,4 +32,9 @@ Q - Rotate left
 
 X - exit
 
+🎥 Full Demo
+
+![Gameplay Demo](demofull.gif)
+
+
 
