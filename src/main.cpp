@@ -1,17 +1,26 @@
 #include <iostream>
+#include <fstream>
 #include <unistd.h>
 #include "player.h"
 #include "map.h"
 #include "utils.h"
+#include <algorithm>
+#include "renderer.h"
+
+const float SHADING_MULTIPLIER = 4.0f; // Adjust for shading effect
 
 // === ASCII Raycasting Renderer ===
 void render3DView(const Player& player, const char* map, int mapWidth, int mapHeight) {
     const int screenWidth = 80;
     const int screenHeight = 24;
 
+    static std::ofstream shadeLog("shades.log", std::ios::app);
+
+
     float planeX = -player.dirY * 0.66f;
     float planeY = player.dirX * 0.66f;
 
+   
     // Directly print each row, no screen buffer needed since we're using ANSI colors
     for (int y = 0; y < screenHeight; ++y) {
         for (int x = 0; x < screenWidth; ++x) {
@@ -57,7 +66,7 @@ void render3DView(const Player& player, const char* map, int mapWidth, int mapHe
                     side = 1;
                 }
                 if (mapY >= 0 && mapY < mapHeight && mapX >= 0 && mapX < mapWidth) {
-                    if (map[mapY * mapWidth + mapX] == '#') hit = true;
+                    if (isWall(map[mapY * mapWidth + mapX])) hit = true;
                 } else {
                     hit = true;
                 }
@@ -78,15 +87,27 @@ void render3DView(const Player& player, const char* map, int mapWidth, int mapHe
             } else if (y > drawEnd) {
                 std::cout << '.'; // Floor
             } else {
+                char tile = map[mapY * mapWidth + mapX];
+                WallType type = getWallType(tile);
+                WallColorInfo colorInfo = getWallColorInfo(type);
+                // Calculate shade based on distance
+                // first handle greyscale for # walls:
                 // Wall: use grey shade based on distance
                 // ANSI 256 grey: 232 (dark) to 255 (light)
-                int shade = 232 + std::min(23, int(perpWallDist * 3));
-                if (shade < 232) shade = 255;
-                if (shade > 255) shade = 232;
-                std::cout << "\033[38;5;" << shade << "m▓\033[0m";
+                if (type == WallType::WALL_GREY){
+                    int shade = 232 + std::min(23, int(perpWallDist * SHADING_MULTIPLIER));
+                    if (shade < 232) shade = 255;
+                    if (shade > 255) shade = 232;
+                    std::cout << "\033[38;5;" << shade << "m█\033[0m";
+                    continue;
+                }
+
+                
+                
+                
             }
         }
-        std::cout << "\n";
+        std::cout << "\n"; 
     }
 }
 // === End Raycasting Renderer ===
@@ -105,8 +126,8 @@ int main() {
         oldTime = time;
         time = getTicks();
         double frameTime = (time - oldTime) / 1000.0;
-        double moveSpeed = frameTime * 2*5.0;
-        double rotSpeed = frameTime * 2*3.0;
+        double moveSpeed = frameTime * 3*5.0;
+        double rotSpeed = frameTime * 3*3.0;
 
         clearScreen();
         //printMapWithPlayer((int)player.x, (int)player.y);
