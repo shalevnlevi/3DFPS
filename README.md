@@ -34,7 +34,7 @@ X - exit
 
 🎥 Full Demo
 
-![Gameplay Demo](demofull.gif)
+![Gameplay Demo](demoFull.gif)
 
 
 
