@@ -15,7 +15,7 @@ Real-time movement and rotation
 
 Wall shading based on distance and texture based on angle.
 
-Expandable: monsters, doors, sprites, textures
+Expandable: monsters, doors, sprites, textures. When doing so it is recommended to move the rendering logic to renderer files.
 
 ⌨️ Controls
 
