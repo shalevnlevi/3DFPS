@@ -1,4 +1,5 @@
-#include "monster.h"
+/**
+  #include "monster.h"
 #include <cmath>
 
 Monster::Monster(float startX, float startY)
@@ -23,3 +24,4 @@ void Monster::moveTowards(float targetX, float targetY, const char* map, int map
     }
     dirX = dx; dirY = dy;
 }
+**/

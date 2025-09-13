@@ -1,7 +1,6 @@
-#include "renderer.h"
+/**#include "renderer.h"
 #include "map.h"
 #include "player.h"
-#include "monster.h"
 #include <iostream>
 #include <algorithm>
 #include <cmath>
@@ -83,8 +82,7 @@ static std::string shadeWall(const RayHit& hit, const char* map,
 
 // --- Main render ---
 void render3DView(const Player& player,
-                  const char* map, int mapWidth, int mapHeight,
-                  const Monster& monster)
+                  const char* map, int mapWidth, int mapHeight)
 {
     float planeX = -player.dirY * 0.66f;
     float planeY =  player.dirX * 0.66f;
@@ -154,3 +152,4 @@ void render3DView(const Player& player,
         std::cout.flush();
     }
 }
+**/
