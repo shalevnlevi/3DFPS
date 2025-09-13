@@ -4,7 +4,8 @@ A simple Wolfenstein 3D–style raycasting engine written in C++ that runs direc
 Move around with WASD and explore a 3D world rendered entirely with ASCII characters.
 
 🎥 Demo
-![Gameplay Demo](demo.gif)
+![Gameplay Demo](demo2.gif)                ![Gameplay Demo](demo1.gif)
+
 
 🚀 Features
 
