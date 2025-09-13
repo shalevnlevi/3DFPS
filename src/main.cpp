@@ -72,6 +72,7 @@ void render3DView(const Player& player, const char* map, int mapWidth, int mapHe
                 }
             }
 
+
             float perpWallDist = (side == 0) ? (sideDistX - deltaDistX) : (sideDistY - deltaDistY);
             int lineHeight = int(screenHeight / (perpWallDist + 0.0001f));
             if (lineHeight > screenHeight) lineHeight = screenHeight;
@@ -89,24 +90,37 @@ void render3DView(const Player& player, const char* map, int mapWidth, int mapHe
             } else {
                 char tile = map[mapY * mapWidth + mapX];
                 WallType type = getWallType(tile);
-                WallColorInfo colorInfo = getWallColorInfo(type);
+                WallColorInfo colorInfo = wallColors.at(type);
+
+                if (type != WallType::WALL_NONE) {
+                    WallColorInfo colorInfo = wallColors.at(type);
+                    const char* blockChar = (side == 0) ? "▓" : "▒";
+
+                    if (colorInfo.useShading) {
+                        int shade = 232 + std::min(23, int(perpWallDist * SHADING_MULTIPLIER));
+                        if (shade < 232) shade = 255;
+                        if (shade > 255) shade = 232;
+
+                        std::cout << "\033[38;5;" << shade << "m" << blockChar << "\033[0m";
+                    } else {
+                        std::cout << "\033[38;5;" << colorInfo.colorCode << "m" << blockChar << "\033[0m";
+                    }
+                }
+
+
+                
+                //WallColorInfo colorInfo = getWallColorInfo(type);
+                
                 // Calculate shade based on distance
                 // first handle greyscale for # walls:
                 // Wall: use grey shade based on distance
                 // ANSI 256 grey: 232 (dark) to 255 (light)
-                if (type == WallType::WALL_GREY){
-                    int shade = 232 + std::min(23, int(perpWallDist * SHADING_MULTIPLIER));
-                    if (shade < 232) shade = 255;
-                    if (shade > 255) shade = 232;
-                    std::cout << "\033[38;5;" << shade << "m█\033[0m";
-                    continue;
-                }
-
                 
-                
+               
                 
             }
         }
+    
         std::cout << "\n"; 
     }
 }

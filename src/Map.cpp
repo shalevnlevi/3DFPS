@@ -5,19 +5,19 @@
 const int mapWidth = 16, mapHeight = 16;
 const char map[] =
     "################"
-    "#..............#"
-    "#....######....#"
-    "#....#....#....#"
-    "#....#....#....#"
-    "#....#....#....#"
-    "#.........#....#"
-    "#.........#....#"
-    "#....######....#"
+    "#......11......#"
+    "#......11......#"
     "#..............#"
     "#..............#"
+    "#..####..####..#"
+    "#..#........#..#"
+    "#..#.2..2...#..#"
+    "#..#.2222...#..#"
+    "#..#########...#"
     "#..............#"
     "#..............#"
-    "#..............#"
+    "#......3.......#"
+    "#......3.......#"
     "#..............#"
     "################";
 
@@ -42,8 +42,10 @@ const char map1[] =
 WallType getWallType(char tile){
     switch (tile) {
         case '#': return WALL_GREY;
-        //case '1': return WALL_RED;
-        case '1': return WALL_BLUE;
+        case '1': return WALL_RED;
+        case '2': return WALL_BLUE;
+        case '3': return WALL_GREEN;
+
         default: return WALL_NONE;
     }
 }
@@ -52,16 +54,16 @@ bool isWall(char tile){
     return (getWallType(tile) != WALL_NONE);
 }
 
-WallColorInfo getWallColorInfo(WallType wall) {
-    switch (wall){
-        case WALL_GREY: return {232, 24};    // 232->255, bright is high
-        case WALL_BLUE: return {153, 133};  // 153->21(light->strong blue)
-        // Add more: e.g. {red_base, red_range}
-        default:        return {244, 1};     // fallback
+// WallColorInfo getWallColorInfo(WallType wall) {
+//     switch (wall){
+//         case WALL_GREY: return {232, 24};    // 232->255, bright is high
+//         case WALL_BLUE: return {153, 133};  // 153->21(light->strong blue)
+//         // Add more: e.g. {red_base, red_range}
+//         default:        return {244, 1};     // fallback
 
-    }
+//     }
     
-}
+// }
 char getArrow(float dirX, float dirY) {
     if (std::abs(dirX) >= std::abs(dirY))
         return (dirX >= 0) ? '<' : '>';
