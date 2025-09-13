@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+
+# Binaries
+game
+game.dSYM/
+
+# Logs
+*.log
+
+# Extra demo outputs
+demoonline-*.gif
+demos/
